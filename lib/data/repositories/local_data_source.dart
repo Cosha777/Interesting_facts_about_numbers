@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-
 import 'package:interesting_facts_about_numbers/domain/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -12,11 +11,9 @@ abstract class LocalDataService {
   Future<void> clearLocalSource();
 }
 
-
 const listKey = 'LIST_KEY';
 
 class LocalDataSourceSharedPref implements LocalDataService {
-
   @override
   Future<List<Info>> getFromLocalSource() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -33,7 +30,8 @@ class LocalDataSourceSharedPref implements LocalDataService {
   @override
   Future<List<String>> writeToLocalSource(List<Info> lists) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> listOfNumbers = lists.map((list) => jsonEncode(list.toJson())).toList();
+    List<String> listOfNumbers =
+        lists.map((list) => jsonEncode(list.toJson())).toList();
     prefs.setStringList(listKey, listOfNumbers);
     return Future.value(listOfNumbers);
   }
@@ -43,25 +41,5 @@ class LocalDataSourceSharedPref implements LocalDataService {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove(listKey);
     return [];
-  }
-}
-
-class LocalDataSourceHive implements LocalDataService {
-  @override
-  Future<void> clearLocalSource() {
-    // TODO: implement clearLocalSource
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Info>> getFromLocalSource() {
-    // TODO: implement getFromLocalSource
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> writeToLocalSource(List<Info> list) {
-    // TODO: implement writeToLocalSource
-    throw UnimplementedError();
   }
 }
