@@ -13,7 +13,7 @@ abstract class RemoteDataService {
 class RemoteDataSourceHTTP implements RemoteDataService {
   @override
   Future<Info> getNumberInfo(String number) =>
-      _getNumber('http://numbersapi.com/$number?json1');
+      _getNumber('http://numbersapi.com/$number?json');
 
   @override
   Future<Info> getRandomNumberInfo() =>
